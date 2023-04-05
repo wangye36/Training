@@ -1,0 +1,1 @@
+1. 创建一个函数，内部使用Switch的方式，去创建一个命令：Get-AllAduser    -domain 列出所有域用户  -group 列出所有的组 -localgroup 列出所有的本地组，set-alladuser   -disable 禁用所有的用户  -enable 开启所有的用户

@@ -1,0 +1,84 @@
+使用awk处理awk02-txt.txt的数据：
+The database contains the names, phone numbers, and money contributions
+to the party campaign for the past three months.
+   1. Print all the phone numbers.
+awk -F: '{print $2}' value.txt
+
+   2. Print Dan's phone number.
+awk -F "[ :]" '$1~/Dan/{print $4}' value.txt
+
+   3. Print Susan's name and phone number.
+awk 'NR==3{print}' value.txt
+ 
+   4. Print all last names beginning with D.
+awk '{print $1}' value.txt
+
+   5. Print all first names beginning with either a C or E.
+awk -F "[ :]"  '(/^C/ || /^E/){print $1}' value.txt
+ 
+   6. Print all first names containing only four characters.
+awk -F "[ :]" 'length($1)==4{print $1,$2}' value.txt
+#awk '(/[[:alpha:]]*5/){print $2 }' value.txt | cut -c4
+
+   7. Print the first names of all those in the 916 area code.
+awk -F "[ :]" '$3~/916/{print$2}' value.txt
+
+   8. Print Mike's campaign contributions. Each value should be printed 
+      with a leading dollar sign; e.g., $250 $100 $175.
+ awk -F "[ :]" '(/^Mike/ && NR==1){print "$"$5,"$"$6,"$"$7}' value.txt
+
+   9. Print last names followed by a comma and the first name.
+awk 'BEGIN{FS="[ :]"}{print $1","$2}' value.txt
+
+
+   10.Write an awk script called facts that
+         a. Prints full names and phone numbers for the Savages.
+ awk '{ sub(/Nancy McNeil/,"Louise McInnes"); print $0 }' value.txt
+         b. Prints Chet's contributions.
+awk -F "[ :]" '$2~/Savage/{print $1,$2"\t"$4}' value.txt
+         c. Prints all those who contributed $250 the first month.
+awk '{ sub(/Nancy McNeil/,"Louise McInnes"); print $0 }' value.txt
+
+使用awk处理以上的数据：
+The database contains the names, phone numbers, and money contributions
+to the party campaign for the past three months.
+   1. Print the first and last names of those who contributed more than
+      $100 in the second month.
+awk -F ":" '( NR>0 && $4>100){print $0}' value.txt
+
+
+   2. Print the names and phone numbers of those who contributed less than
+      $85 in the last month.
+awk -F ":" '( NR>0 && $5<85){print $1 $2}' value.txt
+
+   3. Print the names of those who contributed between $75 and $150 in
+      the first month.
+awk -F ":" '( NR>0 && 75<=$3<=150){print $1 }' value.txt
+
+   4. Print the names of those who contributed less than $800 over the
+      three-month period.
+awk -F ":" '( NR>0 && ($3+$4+$5)<800){print $1 }' value.txt
+   5. Print the names and addresses of those with an average monthly
+      contribution greater than $200.
+awk -F ":" '( NR>0 && ($3+$4+$5)>200){print $1"\t"$2}' value.txt
+
+   6. Print the first name of those not in the 916 area code.
+
+awk -F "[ :]" '!($3~/916/){print$2}' value.txt
+
+   7. Print each record preceded by the number of the record.
+
+awk '{print NR  $1,$2,$3,$4,$5,$6}' value.txt | grep -n '[[:print:]]'
+
+   8. Print the name and total contribution of each person.
+
+awk -F ":" '{print $1 "\t" ($3+$4+$5)}' value.txt
+
+
+   9. Add $10 to Chet's second contribution.
+awk -F ":" '(/^Che/){print $1,$2,$3,$4+10,$5}' value.txt
+
+
+   10.Change Nancy McNeil's name to Louise McInnes.
+
+ awk '{ sub(/Nancy McNeil/,"Louise McInnes"); print $0 }' value.txt

@@ -1,0 +1,18 @@
+1. 匹配出这个文件的IP地址		egrep "^((25[0-5]|2[0-5][0-5]|[0-9]?[0-9][0-9]?)\.){3}(25[0-4]|2[0-5][0-9]|[0-1]?[0-9][0-9]?)$" demo.txt
+				egrep "^((25[0-5]|2[0-5][0-5]|[0-9]?[0-9][0-9]?)\.){3}(25[0-5]|2[0-4][0-9]|[0-1]?[0-9][0-9]?)$" /root/3.26/demo.txt
+2.  查找出有数字的行			grep -n -P '[0-9]' demo.txt
+3.  查找一个数字和一个字母连接起来的	grep -n -P '[[:digit:]][[:alpha:]]' demo.txt
+4.  查找不以r开头的行		grep -n '[^r]' demo.txt
+5.  查找以数字开头的行 		grep -n -P '^[0-9]' demo.txt
+6.  查找包含@的行			grep -n -P '@' demo.txt
+7.  查找大写字母开头的行		grep -n -P '^[A-Z]' demo.txt
+8.  查找小写字母开头的行		grep -n -P '^[a-z]' demo.txt
+9.  查找以.结束的行			grep -n -P '\.$' demo.txt
+10. 去除空行			grep -n -P '[[:print:]]' demo.txt
+11. 查找完全匹配abc的行		echo 'abc' | grep -n -P 'a*c' \  echo 'abc' | grep -n -P 'a?c'
+12. 查找A后有三个数字的行		grep -n -P 'A[0-9][0-9][0-9]' demo.txt
+13. 通过正则找出ip addr里面的IP地址、子网掩码、广播地址。
+ip addr | grep -w ens33 | xargs -n 1 | grep '[[:digit:]][[:punct:]][[:digit:]]' | grep -n -P "[255]$"
+ip addr | grep -w ens33 | xargs -n 1 | grep '[[:digit:]][[:punct:]][[:digit:]]' | grep '/' | cut -d "/" -f 2
+
+ 

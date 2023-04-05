@@ -1,0 +1,4 @@
+name      yuwen shuxue yingyu
+zhangsan   80     94   88
+lisi       88     94   89
+wangwu     76     77   88
